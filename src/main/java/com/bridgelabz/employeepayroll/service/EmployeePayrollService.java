@@ -17,7 +17,6 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 	public String getMessage(String name) {
 		return "Welcome "+name;
 	}
-
 	public String postMessage(Employee employee) {
 		return "Hello "+employee.getFirstName()+""+employee.getLastName()+"!";
 	}
@@ -48,5 +47,4 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 		repo.deleteById(id);
 		return "Employee with ID:"+id+" got deleted";
 	}
-
 }
