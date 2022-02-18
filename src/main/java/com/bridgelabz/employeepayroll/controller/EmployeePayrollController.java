@@ -1,7 +1,6 @@
 package com.bridgelabz.employeepayroll.controller;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,8 +50,8 @@ public class EmployeePayrollController {
 	}
 	//ability to get employee data by id
 	@GetMapping("/employeepayrollservice/get/{id}")
-	public ResponseEntity<Optional<Employee>> getDataFromRepoById(@PathVariable Integer id){
-		return new ResponseEntity<Optional<Employee>>(service.getDataById(id),HttpStatus.OK);
+	public ResponseEntity<Employee> getDataFromRepoById(@PathVariable Integer id){
+		return new ResponseEntity<Employee>(service.getDataById(id),HttpStatus.OK);
 	}
 	//ability to update employee data for particular id
 	@PutMapping("/employeepayrollservice/update/{id}")

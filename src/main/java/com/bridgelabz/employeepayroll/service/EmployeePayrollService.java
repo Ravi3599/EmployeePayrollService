@@ -34,9 +34,12 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 		List<Employee> list=repo.findAll();
 		return list;
 	}
-	public Optional<Employee> getDataById(Integer id) {
+	public Employee getDataById(Integer id) {
 		Optional<Employee> newEmployee = repo.findById(id);
-		return newEmployee;
+		if(newEmployee.isPresent())
+			return newEmployee.get();
+		else
+			return null;
 	}
 	public Employee updateDataById(Integer id,Employee employee) {
 		Employee newEmployee = new Employee(id,employee.getFirstName(),employee.getLastName(),employee.getProfilePic(),employee.getDepartment(),employee.getSalary(),employee.getDate(),employee.getNotes());
