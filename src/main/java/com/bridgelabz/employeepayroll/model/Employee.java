@@ -1,9 +1,17 @@
 package com.bridgelabz.employeepayroll.model;
 
 import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Employee {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
 	private String firstName;
 	private String lastName;
 	private String profilePic;
@@ -11,6 +19,11 @@ public class Employee {
 	private Long salary ;
 	private LocalDate date;
 	private String notes;
+	
+	
+	public Employee() {
+		super();
+	}
 	public Employee(Integer id, String firstName, String lastName, String profilePic, String department, Long salary,
 			LocalDate date, String notes) {
 		super();
@@ -82,7 +95,4 @@ public class Employee {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	
-	
-	
 }
