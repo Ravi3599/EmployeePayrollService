@@ -27,8 +27,8 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 	public String getWelcome() {
 		return "Welcome to Employee Payroll !!!";	
 	}
-	public Employee postDataToRepo(Employee employee) {
-		Employee newEmployee = new Employee(employee);
+	public Employee postDataToRepo(EmployeeDTO employeeDTO) {
+		Employee newEmployee = new Employee(employeeDTO);
 		repo.save(newEmployee);
 		return newEmployee;
 	}

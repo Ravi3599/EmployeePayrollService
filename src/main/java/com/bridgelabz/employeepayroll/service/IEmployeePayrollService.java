@@ -11,7 +11,7 @@ public interface IEmployeePayrollService {
 	public String postMessage(EmployeeDTO employeeDTO);
 	public String putMessage(String name) ;
 	public String getWelcome();
-	public Employee postDataToRepo(Employee employee);
+	public Employee postDataToRepo(EmployeeDTO employeeDTO);
 	public List<Employee> getAllData();
 	public Employee getDataById(Integer id);
 	public Employee updateDataById(Integer id,EmployeeDTO employeeDTO);
