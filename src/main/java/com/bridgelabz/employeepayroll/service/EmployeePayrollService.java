@@ -27,8 +27,9 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 		return "Welcome to Employee Payroll !!!";	
 	}
 	public Employee postDataToRepo(Employee employee) {
-		repo.save(employee);
-		return employee;
+		Employee newEmployee = new Employee(employee);
+		repo.save(newEmployee);
+		return newEmployee;
 	}
 	public List<Employee> getAllData(){
 		List<Employee> list=repo.findAll();
@@ -42,7 +43,7 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 			return null;
 	}
 	public Employee updateDataById(Integer id,Employee employee) {
-		Employee newEmployee = new Employee(id,employee.getFirstName(),employee.getLastName(),employee.getProfilePic(),employee.getDepartment(),employee.getSalary(),employee.getDate(),employee.getNotes());
+		Employee newEmployee = new Employee(id,employee);
 		repo.save(newEmployee);
 		return newEmployee;
 	}

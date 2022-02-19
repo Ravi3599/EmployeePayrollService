@@ -24,17 +24,16 @@ public class Employee {
 	public Employee() {
 		super();
 	}
-	public Employee(Integer id, String firstName, String lastName, String profilePic, String department, Long salary,
-			LocalDate date, String notes) {
+	public Employee(Integer id, Employee employee) {
 		super();
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.profilePic = profilePic;
-		this.department = department;
-		this.salary = salary;
-		this.date = date;
-		this.notes = notes;
+		this.firstName = employee.getFirstName();
+		this.lastName = employee.getLastName();
+		this.profilePic = employee.getProfilePic();
+		this.department = employee.getDepartment();
+		this.salary =employee.getSalary();
+		this.date =employee.getDate();
+		this.notes =employee.getNotes();
 	}
 	public Employee(Employee employee) {
 		super();
