@@ -18,8 +18,8 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 	public String getMessage(String name) {
 		return "Welcome "+name;
 	}
-	public String postMessage(Employee employee) {
-		return "Hello "+employee.getFirstName()+""+employee.getLastName()+"!";
+	public String postMessage(EmployeeDTO employeeDTO) {
+		return "Hello "+employeeDTO.getFirstName()+""+employeeDTO.getLastName()+"!";
 	}
 	public String putMessage(String name) {
 		return "How are you, "+name;
@@ -50,6 +50,6 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 	}
 	public String deleteDataById(Integer id) {
 		repo.deleteById(id);
-		return "Employee with ID:"+id+" got deleted";
+		return null;
 	}
 }
