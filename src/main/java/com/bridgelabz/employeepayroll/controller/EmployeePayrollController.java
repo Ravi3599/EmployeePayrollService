@@ -22,6 +22,7 @@ import com.bridgelabz.employeepayroll.service.IEmployeePayrollService;
 @RestController
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
+	
 	@Autowired
 	IEmployeePayrollService service;
 	
