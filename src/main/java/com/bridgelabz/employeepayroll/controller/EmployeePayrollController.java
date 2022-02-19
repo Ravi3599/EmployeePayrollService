@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 import com.bridgelabz.employeepayroll.model.Employee;
 import com.bridgelabz.employeepayroll.service.IEmployeePayrollService;
 
@@ -55,8 +56,8 @@ public class EmployeePayrollController {
 	}
 	//ability to update employee data for particular id
 	@PutMapping("/employeepayrollservice/update/{id}")
-	public ResponseEntity<Employee> updateDataInRepo(@PathVariable Integer id,@RequestBody Employee employee){
-		return new ResponseEntity<Employee>(service.updateDataById(id,employee),HttpStatus.OK);
+	public ResponseEntity<Employee> updateDataInRepo(@PathVariable Integer id,@RequestBody EmployeeDTO employeeDTO){
+		return new ResponseEntity<Employee>(service.updateDataById(id,employeeDTO),HttpStatus.OK);
 	}
 	//ability to delete employee data for particular id
 	@DeleteMapping("/employeepayrollservice/delete/{id}")

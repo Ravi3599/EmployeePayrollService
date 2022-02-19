@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 import com.bridgelabz.employeepayroll.model.Employee;
 import com.bridgelabz.employeepayroll.repository.EmployeePayrollRepository;
 
@@ -42,8 +43,8 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 		else
 			return null;
 	}
-	public Employee updateDataById(Integer id,Employee employee) {
-		Employee newEmployee = new Employee(id,employee);
+	public Employee updateDataById(Integer id,EmployeeDTO employeeDTO) {
+		Employee newEmployee = new Employee(id,employeeDTO);
 		repo.save(newEmployee);
 		return newEmployee;
 	}
