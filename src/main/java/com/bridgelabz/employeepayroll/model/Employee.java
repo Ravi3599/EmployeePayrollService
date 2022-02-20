@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.aspectj.lang.annotation.RequiredTypes;
+
 import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 
 @Entity
@@ -22,6 +24,9 @@ public class Employee {
 	private LocalDate date;
 	private String notes;
 	
+	public Employee() {
+		super();
+	}
 	public Employee(EmployeeDTO dto) {
 		this.firstName = dto.getFirstName();
 		this.lastName = dto.getLastName();
@@ -30,10 +35,6 @@ public class Employee {
 		this.salary =dto.getSalary();
 		this.date =dto.getDate();
 		this.notes =dto.getNotes();
-	}
-	
-	public Employee() {
-		super();
 	}
 	public Employee(Integer id, EmployeeDTO employeeDTO) {
 		super();
@@ -45,17 +46,6 @@ public class Employee {
 		this.salary =employeeDTO.getSalary();
 		this.date =employeeDTO.getDate();
 		this.notes =employeeDTO.getNotes();
-	}
-	public Employee(Employee employee) {
-		super();
-		this.id = employee.id;
-		this.firstName = employee.firstName;
-		this.lastName = employee.lastName;
-		this.profilePic = employee.profilePic;
-		this.department = employee.department;
-		this.salary = employee.salary;
-		this.date = employee.date;
-		this.notes = employee.notes;
 	}
 	public Integer getId() {
 		return id;
