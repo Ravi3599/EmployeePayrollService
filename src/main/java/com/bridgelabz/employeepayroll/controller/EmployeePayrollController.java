@@ -1,6 +1,9 @@
 package com.bridgelabz.employeepayroll.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +35,7 @@ public class EmployeePayrollController {
 		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
 	@PostMapping("/postMessage")
-	public ResponseEntity<String> postMessage(@RequestBody EmployeeDTO employeeDTO){
+	public ResponseEntity<String> postMessage(@Valid @RequestBody EmployeeDTO employeeDTO){
 		String message = service.postMessage(employeeDTO);
 		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
@@ -49,7 +52,7 @@ public class EmployeePayrollController {
 	}
 	//Ability to save employee data to repo
 	@PostMapping("/create")
-	public ResponseEntity<String> addDataToRepo(@RequestBody EmployeeDTO employeeDTO){
+	public ResponseEntity<String> addDataToRepo(@Valid @RequestBody EmployeeDTO employeeDTO){
 		Employee newEmployee = service.postDataToRepo(employeeDTO);
 		ResponseDTO dto = new ResponseDTO("Record Added Succesfully",newEmployee);
 		return new ResponseEntity(dto,HttpStatus.CREATED);
@@ -70,7 +73,7 @@ public class EmployeePayrollController {
 	}
 	//Ability to update employee data for particular id
 	@PutMapping("/update/{id}")
-	public ResponseEntity<String> updateDataInRepo(@PathVariable Integer id,@RequestBody EmployeeDTO employeeDTO){
+	public ResponseEntity<String> updateDataInRepo(@PathVariable Integer id,@Valid @RequestBody EmployeeDTO employeeDTO){
 		Employee updatedEmployee = service.updateDataById(id, employeeDTO);
 		ResponseDTO dto = new ResponseDTO("Record for particular ID Updated Successfully",updatedEmployee);
 		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
