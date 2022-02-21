@@ -9,13 +9,9 @@ import javax.persistence.Id;
 import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Data
-@Getter
-@Setter
 public class Employee {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
