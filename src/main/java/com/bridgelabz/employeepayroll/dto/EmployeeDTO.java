@@ -7,14 +7,19 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 public class EmployeeDTO {
+	
 	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="Employee firstName is Invalid")
 	private String firstName;
+	
 	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="Employee lastName is Invalid")
 	private String lastName;
+	
 	@NotEmpty(message="ProfilePic cannot be null")
 	private String profilePic;
+	
 	@NotEmpty(message="Department name cannot be null")
 	private String department;
+	
 	@Min(value=500,message="Salary should be more than 500")
 	private Long salary ;
 	private LocalDate date;
