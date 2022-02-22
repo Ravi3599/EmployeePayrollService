@@ -88,4 +88,11 @@ public class EmployeePayrollController {
 		ResponseDTO dto = new ResponseDTO("Record for particular ID Deleted Successfully", service.deleteDataById(id));
 		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
 	}
+	//Ability to get employee data by department name
+	@GetMapping("/getbydepartment/{department}")
+	public ResponseEntity<ResponseDTO> getRecordFromRepoByDepartment(@PathVariable String department)throws EmployeePayrollException{
+		List<Employee> newEmployee= service.getDataByDepartment(department);
+		ResponseDTO dto = new ResponseDTO("Record for given Department Retrieved Successfully", newEmployee);
+		return new ResponseEntity(dto,HttpStatus.OK);
+	}
 }

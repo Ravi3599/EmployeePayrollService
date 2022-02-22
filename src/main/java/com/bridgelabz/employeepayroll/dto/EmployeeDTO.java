@@ -9,9 +9,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
-
 @Data
 public class EmployeeDTO {
 	@NotEmpty(message = "First Name cannot be empty!")
@@ -22,17 +22,15 @@ public class EmployeeDTO {
 	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="Employee lastName is Invalid")
 	private String lastName;
 	
-	@NotNull(message = "The profile picture has to be provided")
+	@NotEmpty(message = "The profile picture has to be provided")
 	private String profilePic;
 	
-	@NotEmpty(message="Department name cannot be null")
+	@NotEmpty(message="Department name has to be provided")
 	private String department;
 	
-	@NotEmpty(message = "Salary cannot be empty!")
 	@Min(value=500,message="Salary should be more than 500")
 	private Long salary ;
 	
-	@NotNull(message = "Date cannot be empty!")
 	@PastOrPresent(message="Date should be past or todays date")
 	private LocalDate date;
 	private String notes;
