@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 import com.bridgelabz.employeepayroll.dto.ResponseDTO;
+import com.bridgelabz.employeepayroll.exception.EmployeePayrollException;
 import com.bridgelabz.employeepayroll.model.Employee;
 import com.bridgelabz.employeepayroll.service.IEmployeePayrollService;
 
@@ -29,17 +30,20 @@ public class EmployeePayrollController {
 	@Autowired
 	IEmployeePayrollService service;
 	
+	//Ability to get simple welcome message with name through request parameter
 	@GetMapping("/getMessage")
 	public ResponseEntity<String> getMessage(@RequestParam String name){
 		String message = service.getMessage(name);
 		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
+	//Ability to get simple "hello" message with firstName and lastName
 	@PostMapping("/postMessage")
 	public ResponseEntity<String> postMessage(@Valid @RequestBody EmployeeDTO employeeDTO){
 		String message = service.postMessage(employeeDTO);
 		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
-	@PutMapping("/putMessage/{name}")
+	//Ability to get simple "hi" message with name of person through pathvariable
+	@GetMapping("/putMessage/{name}")
 	public ResponseEntity<String> putMessage(@PathVariable String name){
 		String message = service.putMessage(name);
 		return new ResponseEntity<String>(message,HttpStatus.OK);
@@ -66,9 +70,9 @@ public class EmployeePayrollController {
 	}
 	//Ability to get employee data by id
 	@GetMapping("/get/{id}")
-	public ResponseEntity<String> getDataFromRepoById(@PathVariable Integer id){
-		Employee existingEmployee = service.getDataById(id);
-		ResponseDTO dto = new ResponseDTO("Record for given ID Retrieved Successfully", existingEmployee);
+	public ResponseEntity<String> getDataFromRepoById(@PathVariable Integer id) throws EmployeePayrollException{
+		Employee newEmployee= service.getDataById(id);
+		ResponseDTO dto = new ResponseDTO("Record for given ID Retrieved Successfully", newEmployee);
 		return new ResponseEntity(dto,HttpStatus.OK);
 	}
 	//Ability to update employee data for particular id
