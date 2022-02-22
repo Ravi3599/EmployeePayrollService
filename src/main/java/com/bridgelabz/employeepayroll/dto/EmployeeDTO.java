@@ -1,30 +1,39 @@
 package com.bridgelabz.employeepayroll.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
+
 
 import lombok.Data;
 
 @Data
 public class EmployeeDTO {
-	
+	@NotEmpty(message = "First Name cannot be empty!")
 	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="Employee firstName is Invalid")
 	private String firstName;
 	
+	@NotEmpty(message = "Last Name cannot be empty!")
 	@Pattern(regexp="^[A-Z]{1}[a-zA-Z\\s]{2,}$",message="Employee lastName is Invalid")
 	private String lastName;
 	
-	@NotEmpty(message="ProfilePic cannot be null")
+	@NotNull(message = "The profile picture has to be provided")
 	private String profilePic;
 	
 	@NotEmpty(message="Department name cannot be null")
 	private String department;
 	
+	@NotEmpty(message = "Salary cannot be empty!")
 	@Min(value=500,message="Salary should be more than 500")
 	private Long salary ;
+	
+	@NotNull(message = "Date cannot be empty!")
+	@PastOrPresent(message="Date should be past or todays date")
 	private LocalDate date;
 	private String notes;
 	
