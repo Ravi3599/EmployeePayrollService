@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 @Data

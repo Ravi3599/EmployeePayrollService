@@ -55,6 +55,10 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 		return newEmp.get();
 	}
 	public Employee updateDataById(Integer id,EmployeeDTO employeeDTO) {
+		Optional<Employee> employee = repo.findById(id);
+		if(employee.isEmpty()) {
+			throw new EmployeePayrollException("Employee Not Found");
+		}
 		Employee newEmployee = new Employee(id,employeeDTO);
 		repo.save(newEmployee);
 		log.info("Record for given id "+id+" got updated");
