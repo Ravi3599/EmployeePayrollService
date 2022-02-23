@@ -13,35 +13,32 @@ import com.bridgelabz.employeepayroll.repository.EmployeePayrollRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+//Created EmployeePayrollService class to serve api calls done by controller layer
 @Service
 @Slf4j
 public class EmployeePayrollService implements IEmployeePayrollService{
+	//Autowired EmployeePayrollRepository interface to inject its dependency here
 	@Autowired
 	EmployeePayrollRepository repo;
 
-	public String getMessage(String name) {
-		return "Welcome "+name;
-	}
-	public String postMessage(EmployeeDTO employeeDTO) {
-		return "Hello "+employeeDTO.getFirstName()+""+employeeDTO.getLastName()+"!";
-	}
-	public String putMessage(String name) {
-		return "How are you, "+name;
-	}
+	//Abiltity to serve controller class api to return welcome message
 	public String getWelcome() {
 		return "Welcome to Employee Payroll !!!";	
 	}
+	//Ability to serve controller class api to store data 
 	public Employee postDataToRepo(EmployeeDTO employeeDTO) {
 		Employee newEmployee = new Employee(employeeDTO);
 		repo.save(newEmployee);
 		log.info("Record got saved");
 		return newEmployee;
 	}
+	//Ability to serve controller class api to retrieve all records
 	public List<Employee> getAllData(){
 		List<Employee> list=repo.findAll();
 		log.info("All records got retrived");
 		return list;
 	}
+	//Ability to serve controller class api to retrieve record for particular id
 	public Employee getDataById(Integer id) {
 //		List<Employee> list = repo.findAll();
 //		Employee newEmp=list.stream().filter(empData->empData.getId()==id)
@@ -54,6 +51,7 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 		}
 		return newEmp.get();
 	}
+	//Ability to serve controller class api to update data for particular id
 	public Employee updateDataById(Integer id,EmployeeDTO employeeDTO) {
 		Optional<Employee> employee = repo.findById(id);
 		if(employee.isEmpty()) {
@@ -64,6 +62,7 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 		log.info("Record for given id "+id+" got updated");
 		return newEmployee;
 	}
+	//Abiltity to serve controller class api to delete record for particular id
 	public String deleteDataById(Integer id) {
 //		List<Employee> list = repo.findAll();
 //		Employee newEmp=list.stream().filter(empData->empData.getId()==id)
@@ -80,6 +79,7 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 		}
 		return null;
 	}
+	//Abilty to serve controller class api to retrieve data having particular department
 	public List<Employee> getDataByDepartment(String department) {
 //		List<Employee> list = repo.findAll();
 //		List<Employee> newEmp=(List<Employee>) list.stream().filter(empData->empData.getDepartment()==department)

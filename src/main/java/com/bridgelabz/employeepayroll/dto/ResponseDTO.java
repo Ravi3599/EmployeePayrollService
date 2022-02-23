@@ -2,6 +2,7 @@ package com.bridgelabz.employeepayroll.dto;
 
 import lombok.Data;
 
+//Created ResponseDTO class to get output in form of message with data
 @Data
 public class ResponseDTO {
 	private String messsage;
@@ -12,16 +13,4 @@ public class ResponseDTO {
 		this.messsage = messsage;
 		this.data = data;
 	}
-//	public String getMesssage() {
-//		return messsage;
-//	}
-//	public void setMesssage(String messsage) {
-//		this.messsage = messsage;
-//	}
-//	public Object getData() {
-//		return data;
-//	}
-//	public void setData(Object data) {
-//		this.data = data;
-//	}
 }

@@ -5,11 +5,9 @@ import java.util.List;
 import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 import com.bridgelabz.employeepayroll.model.Employee;
 
+//Created IEmployeePayrollService interface to achieve abstraction
 public interface IEmployeePayrollService {
 	
-	public String getMessage(String name) ;
-	public String postMessage(EmployeeDTO employeeDTO);
-	public String putMessage(String name) ;
 	public String getWelcome();
 	public Employee postDataToRepo(EmployeeDTO employeeDTO);
 	public List<Employee> getAllData();

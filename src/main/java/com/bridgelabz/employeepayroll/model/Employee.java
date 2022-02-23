@@ -1,16 +1,22 @@
 package com.bridgelabz.employeepayroll.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
 import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 
 import lombok.Data;
 
+//Created Employee class having different fields
 @Entity
 @Data
 public class Employee {
@@ -21,7 +27,11 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String profilePic;
-	private String department;
+	
+	@ElementCollection
+	@CollectionTable(name="employee_department",joinColumns= @JoinColumn(name="id"))
+	@Column(name="department")
+	private List<String> department;
 	private Long salary ;
 	private LocalDate date;
 	private String notes;
@@ -49,64 +59,4 @@ public class Employee {
 		this.date =employeeDTO.getDate();
 		this.notes =employeeDTO.getNotes();
 	}
-//	public Employee(Integer id, String firstName, String lastName, String profilePic, String department, Long salary,
-//			LocalDate date, String notes) {
-//		super();
-//		this.id = id;
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.profilePic = profilePic;
-//		this.department = department;
-//		this.salary = salary;
-//		this.date = date;
-//		this.notes = notes;
-//	}
-//	public Integer getId() {
-//		return id;
-//	}
-//	public void setId(Integer id) {
-//		this.id = id;
-//	}
-//	public String getFirstName() {
-//		return firstName;
-//	}
-//	public void setFirstName(String firstName) {
-//		this.firstName = firstName;
-//	}
-//	public String getLastName() {
-//		return lastName;
-//	}
-//	public void setLastName(String lastName) {
-//		this.lastName = lastName;
-//	}
-//	public String getProfilePic() {
-//		return profilePic;
-//	}
-//	public void setProfilePic(String profilePic) {
-//		this.profilePic = profilePic;
-//	}
-//	public String getDepartment() {
-//		return department;
-//	}
-//	public void setDepartment(String department) {
-//		this.department = department;
-//	}
-//	public Long getSalary() {
-//		return salary;
-//	}
-//	public void setSalary(Long salary) {
-//		this.salary = salary;
-//	}
-//	public LocalDate getDate() {
-//		return date;
-//	}
-//	public void setDate(LocalDate date) {
-//		this.date = date;
-//	}
-//	public String getNotes() {
-//		return notes;
-//	}
-//	public void setNotes(String notes) {
-//		this.notes = notes;
-//	}
 }
