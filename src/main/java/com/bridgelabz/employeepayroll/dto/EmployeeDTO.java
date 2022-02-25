@@ -4,13 +4,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
+
 @Data
 public class EmployeeDTO {
 	@NotEmpty(message = "First Name cannot be empty!")
@@ -24,85 +27,22 @@ public class EmployeeDTO {
 	@NotEmpty(message = "The profile picture has to be provided")
 	private String profilePic;
 	
+	@Pattern(regexp="male|female",message="Gender need to be male or female")
+	private String gender;
+	
 	@NotEmpty(message="Department name has to be provided")
-	private String department;
+	private List<String> department;
 	
 	@Min(value=500,message="Salary should be more than 500")
 	private Long salary ;
 	
+	@NotNull(message="Please provide date")
 	@PastOrPresent(message="Date should be past or todays date")
 	private LocalDate date;
+	@NotBlank(message="Notes have to be filled")
 	private String notes;
 	
 	public EmployeeDTO() {
 		super();
 	}
-
-//	public EmployeeDTO(String firstName, String lastName, String profilePic, String department, Long salary,
-//			LocalDate date, String notes) {
-//		super();
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.profilePic = profilePic;
-//		this.department = department;
-//		this.salary = salary;
-//		this.date = date;
-//		this.notes = notes;
-//	}
-//
-//	public String getFirstName() {
-//		return firstName;
-//	}
-//
-//	public void setFirstName(String firstName) {
-//		this.firstName = firstName;
-//	}
-//
-//	public String getLastName() {
-//		return lastName;
-//	}
-//
-//	public void setLastName(String lastName) {
-//		this.lastName = lastName;
-//	}
-//
-//	public String getProfilePic() {
-//		return profilePic;
-//	}
-//
-//	public void setProfilePic(String profilePic) {
-//		this.profilePic = profilePic;
-//	}
-//
-//	public String getDepartment() {
-//		return department;
-//	}
-//
-//	public void setDepartment(String department) {
-//		this.department = department;
-//	}
-//
-//	public Long getSalary() {
-//		return salary;
-//	}
-//
-//	public void setSalary(Long salary) {
-//		this.salary = salary;
-//	}
-//
-//	public LocalDate getDate() {
-//		return date;
-//	}
-//
-//	public void setDate(LocalDate date) {
-//		this.date = date;
-//	}
-//
-//	public String getNotes() {
-//		return notes;
-//	}
-//
-//	public void setNotes(String notes) {
-//		this.notes = notes;
-//	}	
 }

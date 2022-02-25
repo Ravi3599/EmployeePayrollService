@@ -10,6 +10,8 @@ import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 import com.bridgelabz.employeepayroll.exception.EmployeePayrollException;
 import com.bridgelabz.employeepayroll.model.Employee;
 import com.bridgelabz.employeepayroll.repository.EmployeePayrollRepository;
+import com.bridgelabz.employeepayroll.util.EmailSenderService;
+import com.bridgelabz.employeepayroll.util.TokenUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,26 +19,38 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EmployeePayrollService implements IEmployeePayrollService{
 	@Autowired
-	EmployeePayrollRepository repo;
+	private EmployeePayrollRepository repo;
+	
+	@Autowired
+	TokenUtil tokenutil;
+	@Autowired
+	private EmailSenderService sender;
 
-	public String getMessage(String name) {
-		return "Welcome "+name;
-	}
-	public String postMessage(EmployeeDTO employeeDTO) {
-		return "Hello "+employeeDTO.getFirstName()+""+employeeDTO.getLastName()+"!";
-	}
-	public String putMessage(String name) {
-		return "How are you, "+name;
-	}
 	public String getWelcome() {
 		return "Welcome to Employee Payroll !!!";	
 	}
-	public Employee postDataToRepo(EmployeeDTO employeeDTO) {
+	public String postDataToRepo(EmployeeDTO employeeDTO) {
 		Employee newEmployee = new Employee(employeeDTO);
 		repo.save(newEmployee);
 		log.info("Record got saved");
-		return newEmployee;
+		String token=tokenutil.createToken(newEmployee.getId());
+		//emaillistner.sendMail();
+		//sender.sendEmail("ravirenapurkar@gmail.com", "Test Email", "http://localhost:8080/employeepayrollservice/"+token);
+		return token;
 	}
+	//Retrive all records of Employee Payroll data by token
+	@Override
+	public List<Employee> getEmployeePayRollData(String token) 
+	{
+		int id=tokenutil.decodeToken(token);
+		Optional<Employee> newEmployee=repo.findById(id);
+		if(newEmployee.isPresent()) {
+			List<Employee> listEmployee=repo.findAll();
+		return listEmployee;		
+		}else {
+			System.out.println("Exception ...Token not found!");	
+			return null;	}	
+		}
 	public List<Employee> getAllData(){
 		List<Employee> list=repo.findAll();
 		log.info("All records got retrived");

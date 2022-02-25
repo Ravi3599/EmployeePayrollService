@@ -28,26 +28,8 @@ import com.bridgelabz.employeepayroll.service.IEmployeePayrollService;
 public class EmployeePayrollController {
 	
 	@Autowired
-	IEmployeePayrollService service;
+	private IEmployeePayrollService service;
 	
-	//Ability to get simple welcome message with name through request parameter
-	@GetMapping("/getMessage")
-	public ResponseEntity<String> getMessage(@RequestParam String name){
-		String message = service.getMessage(name);
-		return new ResponseEntity<String>(message,HttpStatus.OK);
-	}
-	//Ability to get simple "hello" message with firstName and lastName
-	@PostMapping("/postMessage")
-	public ResponseEntity<String> postMessage(@Valid @RequestBody EmployeeDTO employeeDTO){
-		String message = service.postMessage(employeeDTO);
-		return new ResponseEntity<String>(message,HttpStatus.OK);
-	}
-	//Ability to get simple "hi" message with name of person through pathvariable
-	@GetMapping("/putMessage/{name}")
-	public ResponseEntity<String> putMessage(@PathVariable String name){
-		String message = service.putMessage(name);
-		return new ResponseEntity<String>(message,HttpStatus.OK);
-	}
 	//Ability to display welcome message
 	@GetMapping("")
 	public ResponseEntity<String> getWelcome(){
@@ -57,8 +39,8 @@ public class EmployeePayrollController {
 	//Ability to save employee data to repo
 	@PostMapping("/create")
 	public ResponseEntity<String> addDataToRepo(@Valid @RequestBody EmployeeDTO employeeDTO){
-		Employee newEmployee = service.postDataToRepo(employeeDTO);
-		ResponseDTO dto = new ResponseDTO("Record Added Succesfully",newEmployee);
+		String entity = service.postDataToRepo(employeeDTO);
+		ResponseDTO dto = new ResponseDTO("Record Added Succesfully",entity);
 		return new ResponseEntity(dto,HttpStatus.CREATED);
 	}
 	//Ability to get all employees' data by findAll() method
