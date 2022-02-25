@@ -27,7 +27,8 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String profilePic;
-	
+	private String gender;
+
 	@ElementCollection
 	@CollectionTable(name="employee_department",joinColumns= @JoinColumn(name="id"))
 	@Column(name="department")
@@ -43,6 +44,7 @@ public class Employee {
 		this.firstName = dto.getFirstName();
 		this.lastName = dto.getLastName();
 		this.profilePic = dto.getProfilePic();
+		this.gender = dto.getGender();
 		this.department = dto.getDepartment();
 		this.salary =dto.getSalary();
 		this.date =dto.getDate();
@@ -54,6 +56,7 @@ public class Employee {
 		this.firstName = employeeDTO.getFirstName();
 		this.lastName = employeeDTO.getLastName();
 		this.profilePic = employeeDTO.getProfilePic();
+		this.gender = employeeDTO.getGender();
 		this.department = employeeDTO.getDepartment();
 		this.salary =employeeDTO.getSalary();
 		this.date =employeeDTO.getDate();

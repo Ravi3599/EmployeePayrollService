@@ -10,6 +10,8 @@ import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 import com.bridgelabz.employeepayroll.exception.EmployeePayrollException;
 import com.bridgelabz.employeepayroll.model.Employee;
 import com.bridgelabz.employeepayroll.repository.EmployeePayrollRepository;
+import com.bridgelabz.employeepayroll.util.EmailSenderService;
+import com.bridgelabz.employeepayroll.util.TokenUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,20 +21,41 @@ import lombok.extern.slf4j.Slf4j;
 public class EmployeePayrollService implements IEmployeePayrollService{
 	//Autowired EmployeePayrollRepository interface to inject its dependency here
 	@Autowired
-	EmployeePayrollRepository repo;
+	private EmployeePayrollRepository repo;
+	
+	@Autowired
+	TokenUtil tokenutil;
+	@Autowired
+	private EmailSenderService sender;
 
 	//Abiltity to serve controller class api to return welcome message
 	public String getWelcome() {
 		return "Welcome to Employee Payroll !!!";	
 	}
 	//Ability to serve controller class api to store data 
-	public Employee postDataToRepo(EmployeeDTO employeeDTO) {
+	public String postDataToRepo(EmployeeDTO employeeDTO) {
 		Employee newEmployee = new Employee(employeeDTO);
 		repo.save(newEmployee);
 		log.info("Record got saved");
-		return newEmployee;
+		String token=tokenutil.createToken(newEmployee.getId());
+		//emaillistner.sendMail();
+		//sender.sendEmail("ravirenapurkar@gmail.com", "Test Email", "http://localhost:8080/employeepayrollservice/"+token);
+		return token;
 	}
-	//Ability to serve controller class api to retrieve all records
+	//Retrive all records of Employee Payroll data by token
+	@Override
+	public List<Employee> getEmployeePayRollData(String token) 
+	{
+		int id=tokenutil.decodeToken(token);
+		Optional<Employee> newEmployee=repo.findById(id);
+		if(newEmployee.isPresent()) {
+			List<Employee> listEmployee=repo.findAll();
+		return listEmployee;		
+		}else {
+			System.out.println("Exception ...Token not found!");	
+			return null;	}	
+		}
+	//Ability to retrieve all data from repository
 	public List<Employee> getAllData(){
 		List<Employee> list=repo.findAll();
 		log.info("All records got retrived");

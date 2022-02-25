@@ -29,7 +29,7 @@ import com.bridgelabz.employeepayroll.service.IEmployeePayrollService;
 public class EmployeePayrollController {
 	//Autowired IEmployeePayrollService to inject its dependency here
 	@Autowired
-	IEmployeePayrollService service;
+	private IEmployeePayrollService service;
 	
 	//Ability to display welcome message
 	@GetMapping("")
@@ -40,8 +40,8 @@ public class EmployeePayrollController {
 	//Ability to save employee data to repo
 	@PostMapping("/create")
 	public ResponseEntity<String> addDataToRepo(@Valid @RequestBody EmployeeDTO employeeDTO){
-		Employee newEmployee = service.postDataToRepo(employeeDTO);
-		ResponseDTO dto = new ResponseDTO("Record Added Succesfully",newEmployee);
+		String entity = service.postDataToRepo(employeeDTO);
+		ResponseDTO dto = new ResponseDTO("Record Added Succesfully",entity);
 		return new ResponseEntity(dto,HttpStatus.CREATED);
 	}
 	//Ability to get all employees' data by findAll() method
