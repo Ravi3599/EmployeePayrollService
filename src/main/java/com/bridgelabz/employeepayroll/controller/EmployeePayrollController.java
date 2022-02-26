@@ -43,6 +43,13 @@ public class EmployeePayrollController {
 		ResponseDTO dto = new ResponseDTO("Record Added Succesfully",entity);
 		return new ResponseEntity(dto,HttpStatus.CREATED);
 	}
+	//Ability to get all employees' data by token
+	@GetMapping("/retrieve/{token}")
+	public ResponseEntity<String>getEmployeePayrollData(String token){
+		List<Employee> listOfEmployee = service.getEmployeePayrollData(token);
+		ResponseDTO dto = new ResponseDTO("Record Retrieved Successfully", listOfEmployee);
+		return new ResponseEntity(dto,HttpStatus.OK);
+	}
 	//Ability to get all employees' data by findAll() method
 	@GetMapping("/get")
 	public ResponseEntity<String>getAllDataFromRepo(){
@@ -57,6 +64,20 @@ public class EmployeePayrollController {
 		ResponseDTO dto = new ResponseDTO("Record for given ID Retrieved Successfully", newEmployee);
 		return new ResponseEntity(dto,HttpStatus.OK);
 	}
+	//Ability to get employee data by token
+	@GetMapping("/get/{token}")
+	public ResponseEntity<String> getDataFromRepoByToken(@PathVariable String token) throws EmployeePayrollException{
+		Employee newEmployee= service.getDataByToken(token);
+		ResponseDTO dto = new ResponseDTO("Record for given ID Retrieved Successfully", newEmployee);
+		return new ResponseEntity(dto,HttpStatus.OK);
+	}
+	//Ability to update employee data for particular token
+	@PutMapping("/update/{token}")
+	public ResponseEntity<String> updateDataByToken(@PathVariable String token,@Valid @RequestBody EmployeeDTO employeeDTO){
+		Employee updatedEmployee = service.updateDataByToken(token, employeeDTO);
+		ResponseDTO dto = new ResponseDTO("Record for particular ID Updated Successfully",updatedEmployee);
+		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
+	}
 	//Ability to update employee data for particular id
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updateDataInRepo(@PathVariable Integer id,@Valid @RequestBody EmployeeDTO employeeDTO){
@@ -68,6 +89,12 @@ public class EmployeePayrollController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteDataInRepo(@PathVariable Integer id){
 		ResponseDTO dto = new ResponseDTO("Record for particular ID Deleted Successfully", service.deleteDataById(id));
+		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
+	}
+	//Ability to delete employee data for particular token
+	@DeleteMapping("/delete/{token}")
+	public ResponseEntity<String> deleteDataByToken(@PathVariable String token){
+		ResponseDTO dto = new ResponseDTO("Record for particular ID Deleted Successfully", service.deleteDataByToken(token));
 		return new ResponseEntity(dto,HttpStatus.ACCEPTED);
 	}
 	//Ability to get employee data by department name
